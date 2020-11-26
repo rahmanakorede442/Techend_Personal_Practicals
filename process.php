@@ -43,7 +43,7 @@ $connect = $conn->query("INSERT INTO tbl_profiles (last_name, middle_name,
  first_name, sex, age, classie ) VALUES ('$lastname', '$middlename',
 '$firstname', '$gender',
 '$age', '$classie')") or die($connect->error);
- $conn->query($connect);
+//  $conn->query($connect);
 
 header('Location: home.php?status=success');
 }

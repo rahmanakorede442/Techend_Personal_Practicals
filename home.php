@@ -1,4 +1,8 @@
 <?php
+include 'header.php';
+include 'connection.php';
+// include 'process.php';   
+
 if(isset($_GET['status']) && ($_GET['status'] == 'success')){
 
 ?>
@@ -18,8 +22,7 @@ else{
 ?>
 
 <?php  
-include 'header.php';
-include 'connection.php';
+
 ?>
 <?php 
 //  $result = $connect->query("SELECT * FROM tbl_profiles") or die($connect->error);
@@ -47,20 +50,27 @@ include 'connection.php';
                 </thead>
                 <tbody>
                 <?php 
-                // if ($result->num_rows > 0){
-                //     while(){
+                $fetched = $conn->query("SELECT * FROM tbl_profiles");
+                // $fetched = $conn->query($sql);
 
-                //     }
-                // }
-                ?>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                if ($fetched->num_rows > 0){
+                    while($auto_row = $fetched->fetch_assoc()){
+                        ?>
+                        <tr>
+                        <td> <?php echo $auto_row['last_name']?> </td>
+                        <td> <?php echo $auto_row['middle_name']?></td>
+                        <td> <?php echo $auto_row['first_name']?></td>
+                        <td> <?php echo $auto_row['sex']?></td>
+                        <td> <?php echo $auto_row['age']?></td>
+                        <td> <?php echo $auto_row['classie']?></td>
                     </tr>
+                    <?php }
+                    }else{
+                    ?>
+                        <td alert alert-danger colspan="6"></td>
+                    <?php }
+                    ?>
+                    
                 </tbody>
             </table>
         </div>
